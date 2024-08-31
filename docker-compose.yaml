@@ -1,0 +1,18 @@
+services:
+  mysql:
+    container_name: learning-livewire-mysql
+    image: mysql:8.0
+    platform: linux/amd64
+    ports:
+      - ${DB_PORT:-3306}:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: app
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./.docker/mysql/:/docker-entrypoint-initdb.d
+
+volumes:
+  mysql-data: {}
